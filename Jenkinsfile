@@ -45,6 +45,7 @@ pipeline {
       agent { 
         docker { 
           image 'snyk/snyk-cli:python-3'
+          args '-p 5000:5000'
             }
       }
       steps {
