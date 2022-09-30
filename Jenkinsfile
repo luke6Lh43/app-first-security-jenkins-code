@@ -46,7 +46,8 @@ pipeline {
         docker { 
           image 'python:alpine3.7'
           args '-p 5000:5000'
-            } 
+            }
+      } 
       steps {
         sh 'pip install -r requirements.txt'
         sh 'apk add libstdc++'
