@@ -41,10 +41,8 @@ pipeline {
         }
       } 
     }
-    // Uncomment for SAST lab step 
-    // Commented section starts
-    /*
     stage('SAS Test') {
+      agent any
       steps {
         snykSecurity(
           snykInstallation: 'SnykV2Plugin',
@@ -53,8 +51,6 @@ pipeline {
           failOnIssues: true)
       }
     }
-    */
-    // Commented section ends 
     stage('Build image') {
       agent any
       steps{
