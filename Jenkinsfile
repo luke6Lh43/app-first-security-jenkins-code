@@ -1,17 +1,18 @@
 pipeline {
   environment {
-    registry = "<your-docker-hub-id>/my-cicd-app"
+    registry = "lciukaj/my-cicd-app"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
-  agent { 
-    docker { 
-      image 'python:alpine3.7'
-      args '-p 5000:5000'
-        } 
-  }
+  agent none
   stages {
     stage('Build') {
+      agent { 
+        docker { 
+          image 'python:alpine3.7'
+          args '-p 5000:5000'
+            } 
+      }
       steps {
         sh 'pip install -r requirements.txt'
         sh 'apk add libstdc++'
@@ -19,7 +20,16 @@ pipeline {
       }
     }
     stage('Test App') {
+      agent { 
+        docker { 
+          image 'python:alpine3.7'
+          args '-p 5000:5000'
+            } 
+      }
       steps {
+        sh 'pip install -r requirements.txt'
+        sh 'apk add libstdc++'
+        sh 'python ./app.py &'
         echo "${env.NODE_NAME}"
         sh 'pwd'
         sh 'uname -a'
@@ -46,6 +56,7 @@ pipeline {
     */
     // Commented section ends 
     stage('Build image') {
+      agent any
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -53,6 +64,7 @@ pipeline {
       }
     }
     stage('Upload Image to Registry') {
+      agent any
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -62,6 +74,7 @@ pipeline {
       }
     }
     stage('Remove Unused docker image') {
+      agent any
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
