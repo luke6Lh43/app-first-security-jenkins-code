@@ -42,15 +42,8 @@ pipeline {
       } 
     }
     stage('SAS Test') {
-      agent { 
-        docker { 
-          image 'python:alpine3.7'
-          args '-p 5000:5000'
-            }
-      } 
+      agent any
       steps {
-        sh 'pip install -r requirements.txt'
-        sh 'apk add libstdc++'
         snykSecurity(
           snykInstallation: 'SnykV2Plugin',
           snykTokenId: 'snyktoken',
