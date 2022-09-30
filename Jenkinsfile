@@ -54,7 +54,7 @@ pipeline {
           snykInstallation: 'SnykV2Plugin',
           snykTokenId: 'snyktoken',
           severity: 'medium',
-          failOnIssues: true)
+          failOnIssues: false)
       }
     }
     stage('Build image') {
