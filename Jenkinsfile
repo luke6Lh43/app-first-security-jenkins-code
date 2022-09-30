@@ -50,8 +50,6 @@ pipeline {
             }
       } 
       steps {
-        sh 'pip install -r requirements.txt'
-        sh 'apk add libstdc++'
         snykSecurity(
           snykInstallation: 'SnykV2Plugin',
           snykTokenId: 'snyktoken',
