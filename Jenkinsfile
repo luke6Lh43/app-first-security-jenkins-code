@@ -82,7 +82,8 @@ pipeline {
       }
     }
 
-    stage ('Panoptica') {
+    stage('Panoptica') {
+        agent any
         steps {
             secureCNVulnerabilityScanner(imageName: registry + ":$BUILD_NUMBER",
             secureCnAccessKey: 'a8d4aeb2-0812-40d4-be5a-69110a7c78ed', secureCnSecretKeyId: 'wZLOQfXr1Mw2FGe0S5P60h23IaDNMdTgievExIezLqo=',
