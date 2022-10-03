@@ -41,24 +41,24 @@ pipeline {
       }
     }
 
-    stage('SAS Test') {
-      agent { 
-        docker { 
-          image 'snyk/snyk-cli:python-3'
-          args '-p 5000:5000'
-            }
-      }
-      steps {
-        sh 'pip install -r requirements.txt'
-        sh 'apk add libstdc++'
-        sh 'python ./app.py &'        
-        snykSecurity(
-          snykInstallation: 'SnykV2Plugin',
-          snykTokenId: 'snyktoken',
-          severity: 'medium',
-          failOnIssues: true)
-      }
-    }
+    // stage('SAS Test') {
+    //   agent { 
+    //     docker { 
+    //       image 'snyk/snyk-cli:python-3'
+    //       args '-p 5000:5000'
+    //         }
+    //   }
+    //   steps {
+    //     sh 'pip install -r requirements.txt'
+    //     sh 'apk add libstdc++'
+    //     sh 'python ./app.py &'        
+    //     snykSecurity(
+    //       snykInstallation: 'SnykV2Plugin',
+    //       snykTokenId: 'snyktoken',
+    //       severity: 'medium',
+    //       failOnIssues: true)
+    //   }
+    // }
 
     stage('Build image') {
       agent any
