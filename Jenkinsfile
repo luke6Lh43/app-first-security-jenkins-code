@@ -82,7 +82,7 @@ pipeline {
       }
     }
 
-    stage('Panoptica') {
+    stage('secureCN') {
         agent any
         steps {
             secureCNVulnerabilityScanner(imageName: registry + ":$BUILD_NUMBER",
