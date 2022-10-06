@@ -82,15 +82,15 @@ pipeline {
       }
     }
 
-    stage('secureCN') {
-        agent any
-        steps {
-            secureCNVulnerabilityScanner(imageName: registry + ":$BUILD_NUMBER",
-            secureCnAccessKey: 'a8d4aeb2-0812-40d4-be5a-69110a7c78ed', secureCnSecretKeyId: 'wZLOQfXr1Mw2FGe0S5P60h23IaDNMdTgievExIezLqo=',
-            highestSeverityAllowed: 'HIGH', dockerRegistryPasswordId: registryCredential,
-            highestSeverityAllowedDf: 'FATAL', url: "securecn.cisco.com", pushLocalImage: 'true')
-        }
-    }
+    // stage('secureCN') {
+    //     agent any
+    //     steps {
+    //         secureCNVulnerabilityScanner(imageName: registry + ":$BUILD_NUMBER",
+    //         secureCnAccessKey: 'ee00ddf5-1af7-4858-a9da-68a3c3fcf3a2', secureCnSecretKeyId: 'L8y+yTveUXFs92q6hJFiN2TwtCV3Wk0SfWOLsQwH6F0=',
+    //         highestSeverityAllowed: 'HIGH', dockerRegistryPasswordId: registryCredential,
+    //         highestSeverityAllowedDf: 'FATAL', url: "securecn.cisco.com", pushLocalImage: 'true')
+    //     }
+    // }
 
     stage('Remove Unused docker image') {
       agent any
